@@ -29,13 +29,19 @@ import React from 'react';
 import logo from './CorkBoardLogo.png';
 import './App.css';
 import NavBar from './components/NavBar.js'
+import Button from './components/Button.js'
 
 function App() {
   return (
     <>
       <header>
-        <img className="logo" src={logo}></img>
+        <a href="/">
+          <img className="logo" src={logo}></img>
+        </a>
         <NavBar></NavBar>
+        <div>
+          <Button text="Login" url="/login"></Button>
+        </div>
       </header>
     </>
   );
