@@ -1,0 +1,12 @@
+.nav_links li {
+    text-decoration: none;
+    list-style: none;
+
+    display: inline-block;
+    padding: 0px 10px; /* Space between the nav links. Seperate 0px (top/bottom) from 10px (right/left) with a space, NOT A COMMA*/
+}
+
+.nav_links li a {
+    color: white;
+    font-size: 20pt;
+}
