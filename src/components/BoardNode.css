@@ -1,0 +1,14 @@
+.board-node {
+    width: fit-content;
+    height: fit-content;
+    color: whitesmoke;
+    background-color: grey;
+    padding: 30px 20px;
+    border-radius: 10px;
+    border-color: green;
+    border-style: solid;
+    border-top-width: 20px;
+    left: 100px;
+    top: 100px;
+    position: absolute;
+}
