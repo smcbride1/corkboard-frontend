@@ -31,6 +31,9 @@ import logo from './CorkBoardLogo.png';
 import './App.css';
 import NavBar from './components/NavBar.js';
 import Button from './components/Button.js';
+import Home from './components/Home.js';
+import BoardManager from './components/BoardManager.js';
+import Login from './components/Login.js';
 
 function App() {
   return (
@@ -45,11 +48,9 @@ function App() {
         </div>
       </header>
       <Router>
-        <Route path="/" component={Home}></Route>
-        <Route path="/boards" component={BoardManager}></Route>
-        <Route path="/walls" component={WallManager}></Route>
-        <Route path="/rooms" component={RoomManager}></Route>
-        <Route path="/login" component={Login}></Route>
+        <Route exact path="/" component={Home}></Route>
+        <Route exact path="/boards" component={BoardManager}></Route>
+        <Route exact path="/login" component={Login}></Route>
       </Router>
     </>
   );
