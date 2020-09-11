@@ -25,11 +25,12 @@
 
 // export default App;
 
-import React from 'react';
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import logo from './CorkBoardLogo.png';
 import './App.css';
-import NavBar from './components/NavBar.js'
-import Button from './components/Button.js'
+import NavBar from './components/NavBar.js';
+import Button from './components/Button.js';
 
 function App() {
   return (
@@ -40,9 +41,16 @@ function App() {
         </a>
         <NavBar></NavBar>
         <div>
-          <Button text="Login" url="/login"></Button>
+          <Button text="Login" path="/login"></Button>
         </div>
       </header>
+      <Router>
+        <Route path="/" component={Home}></Route>
+        <Route path="/boards" component={BoardManager}></Route>
+        <Route path="/walls" component={WallManager}></Route>
+        <Route path="/rooms" component={RoomManager}></Route>
+        <Route path="/login" component={Login}></Route>
+      </Router>
     </>
   );
 }

@@ -4,7 +4,7 @@ import './Button.css';
 export default class NavBar extends Component {
     render() {
         return (
-            <a href={this.props.url}>
+            <a href={this.props.path}>
                 <button>
                     {this.props.text}
                 </button>
