@@ -4,11 +4,19 @@ import './Button.css';
 export default class Button extends Component {
     render() {
         return (
-            <a href={this.props.path}>
-                <button>
-                    {this.props.text}
-                </button>
-            </a>
+            <>
+                {this.props.type === "link" ? 
+                    <a href={this.props.path}>
+                        <button>
+                            {this.props.text}
+                        </button>
+                    </a> 
+                    : 
+                    <button onClick={this.props.onClickEvent}>
+                        {this.props.text}
+                    </button>
+                }
+            </>
         );
     }
 }

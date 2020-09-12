@@ -15,8 +15,8 @@ export default class Home extends Component {
                     </p>
                 </div>
                 <div className="wrapper">
-                    <Button text="Login" path="/login"></Button>
-                    <Button text="Register" path="/register"></Button>
+                    <Button type="link" text="Login" path="/login"></Button>
+                    <Button type="link" text="Register" path="/register"></Button>
                 </div>
             </>
         );

@@ -44,7 +44,7 @@ function App() {
         </a>
         <NavBar></NavBar>
         <div>
-          <Button text="Login" path="/login"></Button>
+          <Button type="link" text="Login" path="/login"></Button>
         </div>
       </header>
       <Router>

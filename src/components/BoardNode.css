@@ -5,8 +5,32 @@
     background-color: grey;
     padding: 30px 20px;
     border-radius: 10px;
-    border-color: green;
+    border-color: #4D4D4D;
     border-style: solid;
     border-top-width: 20px;
     position: absolute;
+    cursor: grab;
+}
+
+.node-title-input {
+    background-color: transparent;
+    border-style: none;
+    font-size: 28px;
+    font-weight: 700;
+    color: white;
+    width: 100%;
+}
+
+.node-title-area {
+    background-color: transparent;
+    border-style: none;
+    font-size: 18px;
+    font-weight: 400;
+    color: white;
+    width: 100%;
+}
+
+hr {
+    color: white;
+    width: auto;
 }
