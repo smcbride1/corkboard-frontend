@@ -31,8 +31,10 @@ export default class BoardManager extends Component {
         console.log("render")
         return (
             <>
-                <Button onClickEvent={this.handleClickBoardButton} text="New Board"/>
-                <Button onClickEvent={this.handleClickNoteButton} text="New Note"/>
+                <div id="tool-bar">
+                    <Button onClickEvent={this.handleClickBoardButton} text="New Board"/>
+                    <Button onClickEvent={this.handleClickNoteButton} text="New Note"/>
+                </div>
                 <div id="board-manager-canvas">
                     {this.state.children}
                 </div>
