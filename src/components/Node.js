@@ -48,11 +48,7 @@ export default class Node extends Component {
                 <div className="board-node" 
                     onMouseDown={ this.handleMouseDown } 
                     onDoubleClick={ this.handleDoubleClick }>
-                    <input type="text" value={this.state.title} onChange={this.handleTitleChange} className="node-title-input"/>
-                    <br/>
-                    <hr/>
-                    <br/>
-                    <textarea value={this.state.content} onChange={this.handleContentChange} className="node-title-area"/>
+                    {this.renderReturnValue}
                 </div>
             </>
         );
