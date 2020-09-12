@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import './BoardManager.css';
 import BoardNode from './BoardNode.js';
-import NewNodeButton from './NewNodeButton.js';
+import NoteNode from './NoteNode.js';
+import NewBoardButton from './NewBoardButton.js';
+import NewNoteButton from './NewBoardButton.js';
+import Button from './Button.js';
 
 export default class BoardManager extends Component {
     constructor() {
@@ -12,9 +15,15 @@ export default class BoardManager extends Component {
         }
     }
 
-    handleClick = () => {
+    handleClickBoardButton = () => {
         this.setState((prevState, props) => ({
             children: [...prevState.children, <BoardNode/>]
+        }))
+    }
+
+    handleClickNoteButton = () => {
+        this.setState((prevState, props) => ({
+            children: [...prevState.children, <NoteNode/>]
         }))
     }
 
@@ -22,8 +31,9 @@ export default class BoardManager extends Component {
         console.log("render")
         return (
             <>
+                <Button onClickEvent={this.handleClickBoardButton} text="New Board"/>
+                <Button onClickEvent={this.handleClickNoteButton} text="New Note"/>
                 <div id="board-manager-canvas">
-                    <NewNodeButton onClickEvent={this.handleClick}></NewNodeButton>
                     {this.state.children}
                 </div>
             </>
