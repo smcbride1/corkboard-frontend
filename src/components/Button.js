@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Button.css';
 
-export default class NavBar extends Component {
+export default class Button extends Component {
     render() {
         return (
             <a href={this.props.path}>

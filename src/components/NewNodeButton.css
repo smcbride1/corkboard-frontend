@@ -1,0 +1,15 @@
+button.new-node-button {
+    font-size: 32px;
+    color: white;
+    background-color: grey;
+    text-decoration: none;
+    border-radius: 50%;
+    text-align: center;
+    justify-content: center;
+    border: none;
+    width: 80px;
+    height: 80px;
+
+    cursor: pointer;
+    margin: 10px;
+}

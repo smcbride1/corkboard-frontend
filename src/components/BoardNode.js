@@ -6,7 +6,6 @@ export default class BoardNode extends Component {
     constructor() {
         super();
         this.mouseEvent = null;
-        this.i = 0
     }
 
     componentDidMount() {
@@ -15,7 +14,7 @@ export default class BoardNode extends Component {
     handleMouseDown = (event) => {
         event.persist();
         this.mouseEvent = event;
-        this.i = 0;
+        console.log()
     }
 
     handleMouseUp = (event) => {
@@ -24,12 +23,6 @@ export default class BoardNode extends Component {
 
     handleMouseMove = (event) => {
         if (this.mouseEvent) {
-            // if (this.i === 0) {
-
-            //     this.i = 1;
-            // }
-
-            
             this.mouseEvent.target.style["left"] = `${event.pageX - 90}px`;
             this.mouseEvent.target.style["top"] = `${event.pageY - 10}px`;
         }

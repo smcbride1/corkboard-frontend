@@ -1,4 +1,4 @@
-.board-manager-canvas {
+#board-manager-canvas {
     display: flex;
     background-color: orange;
     width: 100%;
