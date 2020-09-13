@@ -3,7 +3,7 @@ import './Home.css';
 import Button from './Button.js';
 import InputText from './InputText.js';
 
-export default class Login extends Component {
+export default class Register extends Component {
     handleOnClick = (event) => {
         alert("")
     }
@@ -12,10 +12,12 @@ export default class Login extends Component {
         return (
             <>
                 <div className="wrapper">
-                    <h1>Login</h1>
+                    <h1>Register</h1>
                     <br/>
                 </div>
                 <div className="wrapper">
+                    <p>Name</p>
+                    <InputText/>
                     <p>Email</p>
                     <InputText/>
                     <p>Password</p>
