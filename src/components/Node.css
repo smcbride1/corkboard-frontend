@@ -12,7 +12,7 @@
     cursor: grab;
 }
 
-.node-title-input {
+input[type=text].node-title-input {
     background-color: transparent;
     border-style: none;
     font-size: 28px;
