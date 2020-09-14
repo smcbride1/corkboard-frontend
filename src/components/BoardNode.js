@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Node from './Node.js'
 
-export default class BoardNode extends Node {
+class BoardNode extends Node {
     constructor() {
         super();
         this.state = {
@@ -16,3 +17,24 @@ export default class BoardNode extends Node {
         alert("test2")
     }
 }
+
+const mapStateToProps = state => {
+    return {
+      name: state.name,
+      userId: state.userId,
+      boardId: state.boardId
+    };
+};
+   
+const mapDispatchToProps = dispatch => {
+    return {
+      setName: (name) => dispatch({ type: 'SET_NAME', name: name }),
+      setUserId: (userId) => dispatch({ type: 'SET_USER_ID', userId: userId }),
+      setBoardId: (boardId) => dispatch({ type: 'SET_BOARD_ID', boardId: boardId })
+    };
+};
+   
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(BoardNode);
