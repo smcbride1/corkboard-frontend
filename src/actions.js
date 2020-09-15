@@ -25,12 +25,12 @@ export function setUserId(userId) {
     return { type: SET_TITLE, userId: userId }
 }
 
-export function setBoardId(boardId) {
-    return { type: SET_SHORT_CONTENT, boardId: boardId }
+export function setShortContent(shortContent) {
+    return { type: SET_SHORT_CONTENT, shortContent: shortContent }
 }
 
-export function setBoardId(boardId) {
-    return { type: SET_LONG_CONTENT, boardId: boardId }
+export function setLongContent(longCOntent) {
+    return { type: SET_LONG_CONTENT, longCOntent: longCOntent }
 }
 
 export function setBoardId(boardId) {
