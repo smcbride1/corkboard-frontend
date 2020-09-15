@@ -20,12 +20,6 @@ export default function boardReducer(
           user: action.userId
         }
 
-      case 'SET_BOARD_ID':
-        return {
-          ...state,
-          board: action.boardId
-        }
-
       default:
         return state;
     }

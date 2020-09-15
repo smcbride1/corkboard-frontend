@@ -8,29 +8,55 @@ export default function noteReducer(
     // action
     state = [], action
   ) {
+      let id = action.key;
     switch (action.type) {
+        case 'CREATE_NOTE':
+            return {
+              ...state,
+              notes: [...state.notes],
+              requesting: true
+            }
+
+        case 'START_ADDING_NOTES_REQUEST':
+            return {
+              ...state,
+              notes: [...state.notes],
+              requesting: true
+            }
+       
+        case 'ADD_NOTES':
+            return {
+              ...state,
+              notes: action.notes,
+              requesting: false
+            }
+
         case 'SET_TITLE':
             return {
                 ...state,
-                title: action.title
+                id: {...state[id],
+                title: action.title}
             }
 
         case 'SET_SHORT_CONTENT':
             return {
                 ...state,
-                short_content: action.shortContent
+                id: {...state[id],
+                shortContent: action.shortContent}
             }
 
         case 'SET_LONG_CONTENT':
             return {
                 ...state,
-                long_content: action.longContet
+                id: {...state[id],
+                longContent: action.longContent}
             }
             
         case 'SET_BOARD_ID':
             return {
                 ...state,
-                board_id: action.boardId
+                id: {...state[id],
+                boardId: action.boardId}
             }
 
         default:
