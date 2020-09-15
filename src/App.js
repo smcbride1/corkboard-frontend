@@ -5,7 +5,7 @@ import './App.css';
 import NavBar from './components/NavBar.js';
 import Button from './components/Button.js';
 import Home from './components/Home.js';
-import BoardManager from './components/BoardManager.js';
+import Board from './components/Board.js';
 import Login from './components/Login.js';
 
 function App() {
@@ -22,7 +22,7 @@ function App() {
       </header>
       <Router>
         <Route exact path="/" component={Home}></Route>
-        <Route exact path="/boards" component={BoardManager}></Route>
+        <Route exact path="/boards" component={Board}></Route>
         <Route exact path="/login" component={Login}></Route>
       </Router>
     </>
