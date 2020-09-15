@@ -10,29 +10,21 @@ export class Login extends Component {
     constructor() {
         super();
         this.state = {
-            email: "",
-            password: "",
             error: false,
             errorMessage: ""
         }
     }
 
-    handleEmailChange = (event) => {
-        this.setState({email: event.target.value})
-    }
-
-    handlePasswordChange = (event) => {
-        this.setState({password: event.target.value})
-    }
-
     handleOnSubmit = (event) => {
+        event.preventDefault();
         let formData = new FormData();
-        formData.append('email', this.state.email);
-        formData.append('password', this.state.password);
+        formData.append('email', document.getElementById("email-input").value);
+        formData.append('password', document.getElementById("password-input").value);
 
         fetch('http://localhost:4000/login', {
         method: 'POST', // or 'PUT'
         body: formData,
+        credentials: 'include'
         })
         .then(response => response.json())
         .then(data => {
@@ -42,9 +34,9 @@ export class Login extends Component {
         } else {
             this.props.setUser(data);
             this.props.setLoggedIn(true);
+            window.location.href = "/boards";
         }
         });
-        event.preventDefault();
     }
 
     render() {
@@ -64,9 +56,9 @@ export class Login extends Component {
                         :
                         null}
                         <p>Email</p>
-                        <input type="text" onChange={this.handleEmailChange} value={this.state.email}></input>
+                        <input id="email-input" type="text"></input>
                         <p>Password</p>
-                        <input type="password" onChange={this.handlePasswordChange} value={this.state.password}></input>
+                        <input id="password-input" type="password"></input>
                         <br/>
                         <br/>
                         <Submit value="Login"></Submit>
