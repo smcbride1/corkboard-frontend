@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import './Home.css';
 import Button from './Button.js';
 import Submit from './Submit.js';
 import InputText from './InputText.js';
+import * as actions from '../actions.js';
 
-export default class Login extends Component {
+export class Login extends Component {
     constructor() {
         super();
         this.state = {
@@ -39,7 +41,8 @@ export default class Login extends Component {
             this.setState({error: true});
             this.setState({errorMessage: data.message});
         } else {
-            
+            this.props.setUser(data);
+            this.props.setLoggedIn(true);
         }
         });
         event.preventDefault();
@@ -75,3 +78,25 @@ export default class Login extends Component {
         );
     }
 }
+
+const mapStateToProps = (state, ownProps) => {
+    return {
+        name: state.user.name,
+        email: state.user.email,
+        loggedIn: state.user.loggedIn
+    };
+};
+   
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        setUser: (user) => dispatch(actions.setUser(user)),
+        setUserName: (name) => dispatch(actions.setUserName(name)),
+        setUserEmail: (email) => dispatch(actions.setUserEmail(email)),
+        setLoggedIn: (loggedIn) => dispatch(actions.setLoggedIn(loggedIn))
+    };
+};
+   
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Login);
