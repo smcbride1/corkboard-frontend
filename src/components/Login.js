@@ -36,7 +36,6 @@ export class Login extends Component {
         })
         .then(response => response.json())
         .then(data => {
-        console.log(data.error)
         if (data.error) {
             this.setState({error: true});
             this.setState({errorMessage: data.message});

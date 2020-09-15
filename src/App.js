@@ -9,8 +9,9 @@ import Home from './components/Home.js';
 import Board from './components/Board.js';
 import Login from './components/Login.js';
 import Register from './components/Register.js';
+import ProfileNav from './components/ProfileNav.js';
 
-export function App() {
+export function App(props) {
   return (
     <>
       <header>
@@ -19,7 +20,7 @@ export function App() {
         </a>
         <NavBar></NavBar>
         <div>
-          {state.user.loggedIn ? <Button type="link" text="Login" path="/login"></Button> : <ProfileCard/>}
+          {props.loggedIn ? <ProfileNav user={props.user}/> : <Button type="link" text="Login" path="/login"></Button>}
         </div>
       </header>
       <Router>
@@ -34,7 +35,8 @@ export function App() {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-      loggedIn: state.user.loggedIn
+      loggedIn: state.user.loggedIn,
+      user: state.user
   };
 };
  
