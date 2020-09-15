@@ -8,7 +8,7 @@ export default function noteReducer(
     // action
     state = [], action
   ) {
-      let id = action.key;
+    let id = action.key;
     switch (action.type) {
         case 'CREATE_NOTE':
             return {

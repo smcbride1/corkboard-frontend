@@ -17,12 +17,20 @@ const SET_SHORT_CONTENT = "SET_SHORT_CONTENT"
 const SET_LONG_CONTENT = "SET_LONG_CONTENT"
 const SET_BOARD_ID = "SET_BOARD_ID"
 
+export function addNote(note) {
+    return { type: ADD_NOTE, note: note }
+}
+
+export function createNote() {
+    return { type: CREATE_NOTE }
+}
+
 export function setName(name) {
-    return { type: SET_ID, name: name }
+    return { type: SET_NAME, name: name }
 }
 
 export function setUserId(userId) {
-    return { type: SET_TITLE, userId: userId }
+    return { type: SET_USER_ID, userId: userId }
 }
 
 export function setShortContent(shortContent) {

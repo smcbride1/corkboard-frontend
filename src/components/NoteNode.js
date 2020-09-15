@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Node from './Node.js'
 
 class NoteNode extends Node {
     constructor() {
