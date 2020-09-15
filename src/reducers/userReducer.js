@@ -1,9 +1,4 @@
 export default function userReducer(
-    // state = {
-    //   name: "",
-    //   email: ""
-    // },
-    // action
     state = [], action
   ) {
     switch (action.type) {

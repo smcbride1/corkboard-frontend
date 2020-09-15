@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import * as actions from '../actions.js';
 
 class NoteNode extends Node {
     constructor() {
@@ -81,7 +82,7 @@ const mapStateToProps = (state, ownProps) => {
    
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        setTitle: (title) => dispatch({ type: 'SET_TITLE', id: ownProps.id, title: title }),
+        setTitle: (title) => dispatch(actions.setNoteTitle(title)),
         setShortContent: (shortContent) => dispatch({ type: 'SET_SHORT_CONTENT', id: ownProps.id, shortContent: shortContent }),
         setLongContent: (longContent) => dispatch({ type: 'SET_LONG_CONTENT', id: ownProps.id, longContent: longContent }),
         setBoardId: (boardId) => dispatch({ type: 'SET_BOARD_ID', id: ownProps.id, boardId: boardId })

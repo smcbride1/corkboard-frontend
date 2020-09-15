@@ -12,12 +12,12 @@ export function createBoard() {
     return { type: CREATE_BOARD }
 }
 
-export function setBoardUserId(userId) {
-    return { type: SET_BOARD_USER_ID, userId: userId }
+export function setBoardUserId(id, userId) {
+    return { type: SET_BOARD_USER_ID, id: id, userId: userId }
 }
 
-export function setBoardName(name) {
-    return { type: SET_BOARD_NAME, name: name }
+export function setBoardName(id, name) {
+    return { type: SET_BOARD_NAME, id: id, name: name }
 }
 
 //NOTES
@@ -36,20 +36,20 @@ export function createNote() {
     return { type: CREATE_NOTE }
 }
 
-export function setNoteTitle(title) {
-    return { type: SET_NOTE_TITLE, title: title }
+export function setNoteTitle(id, title) {
+    return { type: SET_NOTE_TITLE, id: id, title: title }
 }
 
-export function setNoteShortContent(shortContent) {
-    return { type: SET_NOTE_SHORT_CONTENT, shortContent: shortContent }
+export function setNoteShortContent(id, shortContent) {
+    return { type: SET_NOTE_SHORT_CONTENT, id: id, shortContent: shortContent }
 }
 
-export function setNoteLongContent(longContent) {
-    return { type: SET_NOTE_LONG_CONTENT, longContent: longContent }
+export function setNoteLongContent(id, longContent) {
+    return { type: SET_NOTE_LONG_CONTENT, id: id, longContent: longContent }
 }
 
-export function setNoteBoardId(boardId) {
-    return { type: SET_NOTE_BOARD_ID, boardId: boardId }
+export function setNoteBoardId(id, boardId) {
+    return { type: SET_NOTE_BOARD_ID, id: id, boardId: boardId }
 }
 
 //USERS

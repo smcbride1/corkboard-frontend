@@ -1,11 +1,4 @@
 export default function noteReducer(
-    // state = {
-    //   title: "",
-    //   short_content: "",
-    //   long_content: "",
-    //   board_id: null
-    // },
-    // action
     state = [], action
   ) {
     let id = action.key;
@@ -26,37 +19,39 @@ export default function noteReducer(
        
         case 'ADD_NOTES':
             return {
+                ...state,
+                notes: [...state.notes, action.notes],
+                requesting: false
+            }
+
+        case 'ADD_NOTE':
+            return {
               ...state,
-              notes: action.notes,
-              requesting: false
+              notes: [...state.notes, action.note]
             }
 
         case 'SET_TITLE':
             return {
                 ...state,
-                id: {...state[id],
-                title: action.title}
+                notes: [...state.notes, state.filter(note => note.id === action.id).title = action.title]
             }
 
         case 'SET_SHORT_CONTENT':
             return {
                 ...state,
-                id: {...state[id],
-                shortContent: action.shortContent}
+                notes: [...state.notes, state.filter(note => note.id === action.id).short_content = action.short_content]
             }
 
         case 'SET_LONG_CONTENT':
             return {
                 ...state,
-                id: {...state[id],
-                longContent: action.longContent}
+                notes: [...state.notes, state.filter(note => note.id === action.id).long_content = action.long_content]
             }
             
         case 'SET_BOARD_ID':
             return {
                 ...state,
-                id: {...state[id],
-                boardId: action.boardId}
+                notes: [...state.notes, state.filter(note => note.id === action.id).board_id = action.board_id]
             }
 
         default:
