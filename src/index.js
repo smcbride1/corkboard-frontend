@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 
 import { rootReducer } from './reducers/rootReducer.js';
 
@@ -12,6 +13,7 @@ import * as serviceWorker from './serviceWorker';
 
 const store = createStore(
   rootReducer,
+  applyMiddleware(thunk),
 	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 

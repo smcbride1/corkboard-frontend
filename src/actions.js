@@ -29,8 +29,8 @@ export function setShortContent(shortContent) {
     return { type: SET_SHORT_CONTENT, shortContent: shortContent }
 }
 
-export function setLongContent(longCOntent) {
-    return { type: SET_LONG_CONTENT, longCOntent: longCOntent }
+export function setLongContent(longContent) {
+    return { type: SET_LONG_CONTENT, longContent: longContent }
 }
 
 export function setBoardId(boardId) {
