@@ -1,33 +1,28 @@
 export default function boardReducer(
     state = [], action
   ) {
+    let id = action.key;
     switch (action.type) {
-      case 'CREATE_BOARD':
-        return {
-          ...state,
-          boards: [...state.boards],
-          requesting: true
-        }
 
-    case 'START_ADDING_BOARDS_REQUEST':
-        return {
-          ...state,
-          boards: [...state.boards],
-          requesting: true
-        }
-   
-    case 'ADD_BOARDS':
-        return {
+      case 'START_ADDING_BOARDS_REQUEST':
+          return {
             ...state,
-            boards: [...state.boards, action.boards],
-            requesting: false
-        }
+            boards: [...state.boards],
+            requesting: true
+          }
+    
+      case 'ADD_BOARDS':
+          return {
+              ...state,
+              boards: [...state.boards, action.boards],
+              requesting: false
+          }
 
-    case 'ADD_BOARD':
-        return {
-          ...state,
-          boards: [...state.boards, action.board]
-        }
+      case 'ADD_BOARD':
+          return {
+            ...state,
+            boards: [...state.boards, action.board]
+          }
 
       case 'SET_NAME':
         return {

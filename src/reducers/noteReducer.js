@@ -3,12 +3,6 @@ export default function noteReducer(
   ) {
     let id = action.key;
     switch (action.type) {
-        case 'CREATE_NOTE':
-            return {
-              ...state,
-              notes: [...state.notes],
-              requesting: true
-            }
 
         case 'START_ADDING_NOTES_REQUEST':
             return {

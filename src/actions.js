@@ -22,18 +22,30 @@ export function setBoardName(id, name) {
 
 //NOTES
 const ADD_NOTE = "ADD_NOTE"
-const CREATE_NOTE = "CREATE_NOTE"
 const SET_NOTE_TITLE = "SET_NOTE_TITLE"
 const SET_NOTE_SHORT_CONTENT = "SET_NOTE_SHORT_CONTENT"
 const SET_NOTE_LONG_CONTENT = "SET_NOTE_LONG_CONTENT"
 const SET_NOTE_BOARD_ID = "SET_NOTE_BOARD_ID"
 
-export function addNote(note) {
-    return { type: ADD_NOTE, note: note }
+export function createNote(userId, boardId) {
+    let formData = new FormData();
+    formData.append('user_id', userId);
+    formData.append('board_id', boardId);
+
+    return (dispatch) => {
+      dispatch({ type: 'START_CREATING_NOTE_REQUEST' });
+      fetch(`http://localhost:4000/notes`, {
+          credentials: 'include',
+          method: 'post',
+          body: formData
+      })
+        .then(response => response.json())
+        .then(note => dispatch(addNote(note)));
+    };
 }
 
-export function createNote() {
-    return { type: CREATE_NOTE }
+export function addNote(note) {
+    return { type: ADD_NOTE, note: note }
 }
 
 export function setNoteTitle(id, title) {
