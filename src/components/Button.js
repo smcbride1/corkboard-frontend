@@ -12,7 +12,7 @@ export default class Button extends Component {
                         </button>
                     </a> 
                     : 
-                    <button onClick={this.props.onClickEvent}>
+                    <button onClick={this.props.onClickEvent} key={this.props.key} id={this.props.id}>
                         {this.props.text}
                     </button>
                 }

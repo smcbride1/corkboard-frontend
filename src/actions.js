@@ -1,15 +1,45 @@
 //BOARDS
 const ADD_BOARD = "ADD_BOARD"
-const CREATE_BOARD = "CREATE_BOARD"
+const SET_BOARDS = "SET_BOARDS"
 const SET_BOARD_NAME = "SET_BOARD_NAME"
 const SET_BOARD_USER_ID = "SET_BOARD_USER_ID"
+const SET_CURRENT_BOARD = "SET_CURRENT_BOARD"
+const START_CREATING_BOARD_REQUEST = "START_CREATING_BOARD_REQUEST"
+const START_FETCHING_BOARDS_REQUEST = "START_FETCHING_BOARDS_REQUEST"
+
+export function createBoard(userId) {
+    let formData = new FormData();
+    formData.append('user_id', userId);
+
+    return (dispatch) => {
+      dispatch({ type: START_CREATING_BOARD_REQUEST });
+      fetch(`http://localhost:4000/boards`, {
+          credentials: 'include',
+          method: 'post',
+          body: formData
+      })
+        .then(response => response.json())
+        .then(board => dispatch(addBoard(board)));
+    };
+}
+
+export function getBoards(userId) {
+    return (dispatch) => {
+      dispatch({ type: START_FETCHING_BOARDS_REQUEST });
+      fetch(`http://localhost:4000/users/${userId}/boards`, {
+          credentials: 'include'
+      })
+        .then(response => response.json())
+        .then(boards => dispatch(setBoards(boards)));
+    };
+}
+
+export function setBoards(boards) {
+    return { type: SET_BOARDS, boards: boards }
+}
 
 export function addBoard(board) {
     return { type: ADD_BOARD, board: board }
-}
-
-export function createBoard() {
-    return { type: CREATE_BOARD }
 }
 
 export function setBoardUserId(id, userId) {
@@ -18,6 +48,10 @@ export function setBoardUserId(id, userId) {
 
 export function setBoardName(id, name) {
     return { type: SET_BOARD_NAME, id: id, name: name }
+}
+
+export function setCurrentBoard(id) {
+    return { type: SET_CURRENT_BOARD, id: id }
 }
 
 //NOTES

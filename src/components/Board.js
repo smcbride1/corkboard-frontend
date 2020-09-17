@@ -41,7 +41,7 @@ export class Board extends Component {
 const mapStateToProps = (state, ownProps) => {
     return {
         user: state.user,
-        board: state.board.boards[this.props.key]
+        boards: state.board.boards
     };
 };
    

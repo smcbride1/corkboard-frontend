@@ -1,20 +1,27 @@
 export default function boardReducer(
-    state = [], action
+    state = {boards: []}, action
   ) {
     let id = action.key;
     switch (action.type) {
 
-      case 'START_ADDING_BOARDS_REQUEST':
+      case 'START_CREATING_BOARD_REQUEST':
+          return {
+            ...state,
+            boards: [...state.boards],
+            requesting: true
+          }
+
+      case 'START_FETCHING_BOARDS_REQUEST':
           return {
             ...state,
             boards: [...state.boards],
             requesting: true
           }
     
-      case 'ADD_BOARDS':
+      case 'SET_BOARDS':
           return {
               ...state,
-              boards: [...state.boards, action.boards],
+              boards: action.boards,
               requesting: false
           }
 
@@ -33,7 +40,14 @@ export default function boardReducer(
       case 'SET_USER_ID':
         return {
           ...state,
-          boards: [...state.boards, state.filter(board => board.id === action.id).user_id = action.user_id]
+          boards: [...state.boards, state.filter(board => board.id === action.id).userId = action.userId]
+        }
+
+      case 'SET_CURRENT_BOARD':
+        return {
+          ...state,
+          boards: [...state.boards],
+          currentBoard: action.id
         }
 
       default:

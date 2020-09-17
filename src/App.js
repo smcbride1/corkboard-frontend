@@ -6,7 +6,7 @@ import './App.css';
 import NavBar from './components/NavBar.js';
 import Button from './components/Button.js';
 import Home from './components/Home.js';
-import Board from './components/Board.js';
+import BoardManager from './components/BoardManager.js';
 import Login from './components/Login.js';
 import Register from './components/Register.js';
 import ProfileNav from './components/ProfileNav.js';
@@ -56,7 +56,7 @@ export class App extends Component {
         </header>
         <Router>
           <Route exact path="/" component={Home}></Route>
-          <Route exact path="/boards" component={Board}></Route>
+          <Route exact path="/boards" component={this.props.loggedIn ? BoardManager : Login}></Route>
           <Route exact path="/login" component={Login}></Route>
           <Route exact path="/register" component={Register}></Route>
         </Router>
