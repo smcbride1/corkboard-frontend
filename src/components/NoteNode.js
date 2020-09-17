@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import './NoteNode.css'
 import * as actions from '../actions.js';
 
-class NoteNode extends Node {
+class NoteNode extends Component {
     constructor() {
         super();
         // this.state = {
@@ -11,14 +12,8 @@ class NoteNode extends Node {
         //     content: "Content"
         // }
         this.mouseEvent = null;
-        this.renderReturnValue =
-        <>
-            <input type="text" value={this.state.title} onChange={this.handleTitleChange} className="node-title-input"/>
-            <br/>
-            <hr/>
-            <br/>
-            <textarea value={this.state.content} onChange={this.handleContentChange} className="node-title-area"/>
-        </>
+        this.offsetAdjustmentX = 10;
+        this.offsetAdjustmentY = 80;
     }
     
     componentDidMount() {
@@ -35,8 +30,8 @@ class NoteNode extends Node {
 
     handleMouseMove = (event) => {
         if (this.mouseEvent) {
-            this.mouseEvent.target.style["left"] = `${event.pageX - 10}px`;
-            this.mouseEvent.target.style["top"] = `${event.pageY - 10}px`;
+            this.mouseEvent.target.style["left"] = `${event.clientX - this.offsetAdjustmentX}px`;
+            this.mouseEvent.target.style["top"] = `${event.clientY - this.offsetAdjustmentY}px`;
         }
     }
     
@@ -45,13 +40,13 @@ class NoteNode extends Node {
     }
 
     handleTitleChange = (event) => {
-        event.persist()
-        this.setState((prevState, props) => ({...prevState, title: event.target.value}))
+        event.persist();
+        this.props.setNoteTitle(event.target.value);
     }
 
-    handleContentChange = (event) => {
-        event.persist()
-        this.setState((prevState, props) => ({...prevState, content: event.target.value}))
+    handleShortContentChange = (event) => {
+        event.persist();
+        this.props.setNoteShortContent(event.target.value);
     }
     
     render() {
@@ -59,10 +54,13 @@ class NoteNode extends Node {
         document.addEventListener("mousemove", this.handleMouseMove);
         return (
             <>
-                <div className="board-node" 
-                    onMouseDown={ this.handleMouseDown } 
-                    onDoubleClick={ this.handleDoubleClick }>
-                    {this.renderReturnValue}
+
+                <div className="note-node" onMouseDown={ this.handleMouseDown } onDoubleClick={ this.handleDoubleClick }>
+                    <input type="text" value={this.props.note.title} onChange={this.handleTitleChange} className="node-title-input"/>
+                    <br/>
+                    <hr/>
+                    <br/>
+                    <textarea value={this.props.note.short_content} onChange={this.handleShortContentChange} className="node-short-content-area"/>
                 </div>
             </>
         );
@@ -70,22 +68,25 @@ class NoteNode extends Node {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    let myState = state[ownProps.key]
+    let id = parseInt(ownProps.id.split("note-")[1]);
+
+    //For some reason, adding the `notes` key and setting the value to `state.note.notes` helped
+    //fix render not being called when note.title was being updated. Maybe it has to do with 
+    //`note` having a value that is dependent on .find?
     return {
-        key: myState.id,
-        title: myState.title,
-        shortContent: myState.shortContent,
-        longContent: myState.longContent,
-        boardId: myState.boardId
+        note: state.note.notes.find(note => note.id === id),
+        notes: state.note.notes
     };
 };
    
 const mapDispatchToProps = (dispatch, ownProps) => {
+    let noteId = parseInt(ownProps.id.split("note-")[1]);
+
     return {
-        setTitle: (title) => dispatch(actions.setNoteTitle(title)),
-        setShortContent: (shortContent) => dispatch({ type: 'SET_SHORT_CONTENT', id: ownProps.id, shortContent: shortContent }),
-        setLongContent: (longContent) => dispatch({ type: 'SET_LONG_CONTENT', id: ownProps.id, longContent: longContent }),
-        setBoardId: (boardId) => dispatch({ type: 'SET_BOARD_ID', id: ownProps.id, boardId: boardId })
+        setNoteTitle: (title) => dispatch(actions.setNoteTitle(noteId, title)),
+        setNoteShortContent: (shortContent) => dispatch(actions.setNoteShortContent(noteId, shortContent)),
+        setNoteLongContent: (longContent) => dispatch(actions.setNoteLongContent(noteId, longContent)),
+        setNoteBoardId: (boardId) => dispatch(actions.setNoteBoardId(noteId, boardId))
     };
 };
    

@@ -31,16 +31,16 @@ export default function boardReducer(
             boards: [...state.boards, action.board]
           }
 
-      case 'SET_NAME':
+      case 'SET_BOARD_NAME':
         return {
           ...state,
-          boards: [...state.boards, state.filter(board => board.id === action.id).name = action.name]
+          boards: [...state.boards, state.boards.find(board => board.id === action.id).name = action.name]
         }
 
-      case 'SET_USER_ID':
+      case 'SET_BOARD_USER_ID':
         return {
           ...state,
-          boards: [...state.boards, state.filter(board => board.id === action.id).userId = action.userId]
+          boards: [...state.boards, state.boards.find(board => board.id === action.id).userId = action.userId]
         }
 
       case 'SET_CURRENT_BOARD':

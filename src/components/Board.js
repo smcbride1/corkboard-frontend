@@ -27,19 +27,19 @@ export class Board extends Component {
                 </div>
                 <div id="board-canvas">
                     <NewNoteButton onClickEvent={this.handleClickCreateNoteButton}/>
-                    {this.props.notes.map(note => <NoteNode/>)}
+                    {this.props.notes.map(note => <NoteNode id={`note-${note.id}`}/>)}
                 </div>
             </>
         );
     }
 }
 
-const mapStateToProps = (state, ownProps) => 
-{
+const mapStateToProps = (state, ownProps) => {
+    let id = parseInt(ownProps.id.split("board-")[1]);
     return {
         user: state.user,
         notes: state.note.notes,
-        board: state.board.boards.filter(board => board.id === parseInt(ownProps.id.split("board-")[1]))[0]
+        board: state.board.boards.find(board => board.id === id)
     };
 };
    

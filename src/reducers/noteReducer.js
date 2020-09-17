@@ -1,5 +1,5 @@
 export default function noteReducer(
-    state = [], action
+    state = {notes: []}, action
   ) {
     let id = action.key;
     switch (action.type) {
@@ -23,28 +23,31 @@ export default function noteReducer(
               notes: [...state.notes, action.note]
             }
 
-        case 'SET_TITLE':
+        case 'SET_NOTE_TITLE':
+            let notes = [...state.notes]
+            let index = notes.findIndex(note => note.id === action.id)
+            notes[index].title = action.title;
             return {
                 ...state,
-                notes: [...state.notes, state.filter(note => note.id === action.id).title = action.title]
+                notes: [notes[0]]
             }
 
-        case 'SET_SHORT_CONTENT':
+        case 'SET_NOTE_SHORT_CONTENT':
             return {
                 ...state,
-                notes: [...state.notes, state.filter(note => note.id === action.id).short_content = action.short_content]
+                notes: [...state.notes, state.notes.find(note => note.id === action.id).short_content = action.short_content]
             }
 
-        case 'SET_LONG_CONTENT':
+        case 'SET_NOTE_LONG_CONTENT':
             return {
                 ...state,
-                notes: [...state.notes, state.filter(note => note.id === action.id).long_content = action.long_content]
+                notes: [...state.notes, state.notes.find(note => note.id === action.id).long_content = action.long_content]
             }
             
-        case 'SET_BOARD_ID':
+        case 'SET_NOTE_BOARD_ID':
             return {
                 ...state,
-                notes: [...state.notes, state.filter(note => note.id === action.id).board_id = action.board_id]
+                notes: [...state.notes, state.notes.find(note => note.id === action.id).board_id = action.board_id]
             }
 
         default:

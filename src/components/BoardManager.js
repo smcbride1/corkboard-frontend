@@ -23,7 +23,7 @@ export class BoardManager extends Component {
         this.setState((prevState) => ({collapsed: !prevState.collapsed}))
         if (!this.state.collapsed) {
             document.getElementById("board-manager").style.visibility = "hidden";
-            document.getElementById("toggle-board-manager-button").style.left = "10px";
+            document.getElementById("toggle-board-manager-button").style.left = "0px";
         } else {
             document.getElementById("board-manager").style.visibility = "visible";
             document.getElementById("toggle-board-manager-button").style.left = "300px";

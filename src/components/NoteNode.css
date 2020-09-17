@@ -1,4 +1,4 @@
-.board-node {
+.note-node {
     width: fit-content;
     height: fit-content;
     color: whitesmoke;
@@ -22,7 +22,7 @@ input[type=text].node-title-input {
     text-align: center;
 }
 
-.node-title-area {
+.node-short-content-area {
     background-color: transparent;
     border-style: none;
     font-size: 18px;
