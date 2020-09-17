@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import './NewNoteButton.css';
-import AddIcon from '../AddIcon.svg'
+import './ToggleBoardManagerButton.css';
+import HamburgerIcon from '../HamburgerIcon.svg'
 
-export default class NewNoteButton extends Component {
+export default class ToggleBoardManagerButton extends Component {
     render() {
         return (
-            <button class="new-node-button" onClick={this.props.onClickEvent}>
-                <img src={AddIcon}/>
+            <button id="toggle-board-manager-button" onClick={this.props.onClickEvent}>
+                <img src={HamburgerIcon}/>
             </button>
         );
     }

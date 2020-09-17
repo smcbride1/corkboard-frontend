@@ -23,7 +23,7 @@ export function createBoard(userId) {
     };
 }
 
-export function getBoards(userId) {
+export function fetchBoards(userId) {
     return (dispatch) => {
       dispatch({ type: START_FETCHING_BOARDS_REQUEST });
       fetch(`http://localhost:4000/users/${userId}/boards`, {
@@ -60,6 +60,8 @@ const SET_NOTE_TITLE = "SET_NOTE_TITLE"
 const SET_NOTE_SHORT_CONTENT = "SET_NOTE_SHORT_CONTENT"
 const SET_NOTE_LONG_CONTENT = "SET_NOTE_LONG_CONTENT"
 const SET_NOTE_BOARD_ID = "SET_NOTE_BOARD_ID"
+const START_CREATING_NOTE_REQUEST = "START_CREATING_NOTE_REQUEST"
+const START_FETCHING_NOTES_REQUEST = "START_FETCHING_NOTES_REQUEST"
 
 export function createNote(userId, boardId) {
     let formData = new FormData();
@@ -67,7 +69,7 @@ export function createNote(userId, boardId) {
     formData.append('board_id', boardId);
 
     return (dispatch) => {
-      dispatch({ type: 'START_CREATING_NOTE_REQUEST' });
+      dispatch({ type: START_CREATING_NOTE_REQUEST });
       fetch(`http://localhost:4000/notes`, {
           credentials: 'include',
           method: 'post',
@@ -77,6 +79,15 @@ export function createNote(userId, boardId) {
         .then(note => dispatch(addNote(note)));
     };
 }
+
+export function fetchNotes(boardId) {
+    return (dispatch) => {
+      dispatch({ type: START_FETCHING_NOTES_REQUEST });
+      fetch(`http://localhost:4000/boards/${boardId}/notes`)
+        .then(response => response.json())
+        .then(notes => dispatch({ type: 'ADD_NOTES', notes }));
+    };
+  }
 
 export function addNote(note) {
     return { type: ADD_NOTE, note: note }

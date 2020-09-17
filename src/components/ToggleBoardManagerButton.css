@@ -1,0 +1,15 @@
+button#toggle-board-manager-button {
+    position: absolute;
+    z-index: 10;
+    left: 300px;
+    background-image: url('localhost:3000/HamburgerIcon.svg');
+    color: white;
+    background-color: grey;
+    text-decoration: none;
+    border: none;
+    width: 80px;
+    height: 80px;
+
+    cursor: pointer;
+    margin: 10px;
+}

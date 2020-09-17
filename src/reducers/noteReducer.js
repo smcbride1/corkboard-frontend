@@ -7,14 +7,13 @@ export default function noteReducer(
         case 'START_ADDING_NOTES_REQUEST':
             return {
               ...state,
-              notes: [...state.notes],
               requesting: true
             }
        
         case 'ADD_NOTES':
             return {
                 ...state,
-                notes: [...state.notes, action.notes],
+                notes: action.notes,
                 requesting: false
             }
 
