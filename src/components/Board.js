@@ -16,17 +16,17 @@ export class Board extends Component {
     }
 
     componentDidMount() {
-        console.log(`Board: ${this.props.board.id}`)
         this.props.fetchNotes(this.props.board.id);
     }
 
     render() {
         return (
             <>
-                <div id="tool-bar">
-                </div>
                 <div id="board-canvas">
                     <NewNoteButton onClickEvent={this.handleClickCreateNoteButton}/>
+                    <div className="wrapper">
+                        {this.props.updatingNote ? <p className="save-text">Saving...</p> : <p className="save-text">Saved</p>}
+                    </div>
                     {this.props.notes.map(note => <NoteNode id={`note-${note.id}`}/>)}
                 </div>
             </>
@@ -39,6 +39,7 @@ const mapStateToProps = (state, ownProps) => {
     return {
         user: state.user,
         notes: state.note.notes,
+        updatingNote: state.note.updatingNote,
         board: state.board.boards.find(board => board.id === id)
     };
 };

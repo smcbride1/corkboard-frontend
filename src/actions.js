@@ -60,8 +60,12 @@ const SET_NOTE_TITLE = "SET_NOTE_TITLE"
 const SET_NOTE_SHORT_CONTENT = "SET_NOTE_SHORT_CONTENT"
 const SET_NOTE_LONG_CONTENT = "SET_NOTE_LONG_CONTENT"
 const SET_NOTE_BOARD_ID = "SET_NOTE_BOARD_ID"
+const SET_NOTE_X_OFFSET = "SET_NOTE_X_OFFSET"
+const SET_NOTE_Y_OFFSET = "SET_NOTE_Y_OFFSET"
 const START_CREATING_NOTE_REQUEST = "START_CREATING_NOTE_REQUEST"
 const START_FETCHING_NOTES_REQUEST = "START_FETCHING_NOTES_REQUEST"
+const START_UPDATING_NOTE_REQUEST = "START_UPDATING_NOTE_REQUEST"
+const FINISH_UPDATE = "FINISH_UPDATE"
 
 export function createNote(userId, boardId) {
     let formData = new FormData();
@@ -97,16 +101,46 @@ export function setNoteTitle(id, title) {
     return { type: SET_NOTE_TITLE, id: id, title: title }
 }
 
-export function setNoteShortContent(id, shortContent) {
-    return { type: SET_NOTE_SHORT_CONTENT, id: id, shortContent: shortContent }
+export function setNoteShortContent(id, short_content) {
+    return { type: SET_NOTE_SHORT_CONTENT, id: id, short_content: short_content }
 }
 
-export function setNoteLongContent(id, longContent) {
-    return { type: SET_NOTE_LONG_CONTENT, id: id, longContent: longContent }
+export function setNoteLongContent(id, long_content) {
+    return { type: SET_NOTE_LONG_CONTENT, id: id, long_content: long_content }
 }
 
-export function setNoteBoardId(id, boardId) {
-    return { type: SET_NOTE_BOARD_ID, id: id, boardId: boardId }
+export function setNoteBoardId(id, board_id) {
+    return { type: SET_NOTE_BOARD_ID, id: id, board_id: board_id }
+}
+
+export function setNoteXOffset(id, x_offset) {
+    return { type: SET_NOTE_X_OFFSET, id: id, x_offset: x_offset }
+}
+
+export function setNoteYOffset(id, y_offset) {
+    return { type: SET_NOTE_Y_OFFSET, id: id, y_offset: y_offset }
+}
+
+export function updateNote(note) {
+    let formData = new FormData();
+    for (let key in note) {
+        formData.append(`note[${key}]`, note[key]);
+    }
+
+    return (dispatch) => {
+      dispatch({ type: START_UPDATING_NOTE_REQUEST });
+      fetch(`http://localhost:4000/notes/${note.id}`, {
+          credentials: 'include',
+          method: 'put',
+          body: formData
+      })
+        .then(response => response.json())
+        .then(note => dispatch(finishUpdate()));
+    };
+}
+
+export function finishUpdate() {
+    return { type: FINISH_UPDATE }
 }
 
 //USERS

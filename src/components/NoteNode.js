@@ -11,9 +11,16 @@ class NoteNode extends Component {
         //     title: "Title",
         //     content: "Content"
         // }
+        
+        this.state = {
+            typing: false,
+        }
+
         this.mouseEvent = null;
         this.offsetAdjustmentX = 10;
         this.offsetAdjustmentY = 80;
+        this.editFinishTimeout = null;
+        this.editFinishTimeoutValue = 5000;
     }
     
     componentDidMount() {
@@ -25,6 +32,12 @@ class NoteNode extends Component {
     }
 
     handleMouseUp = () => {
+        if (this.mouseEvent) {
+            let thisNote = document.getElementById(`note-${this.props.note.id}`);
+            this.props.setNoteXOffset(thisNote.style.left.split("px")[0]);
+            this.props.setNoteYOffset(thisNote.style.top.split("px")[0]);
+            this.finishEditSaveCheck();
+        }
         this.mouseEvent = null;
     }
 
@@ -39,14 +52,22 @@ class NoteNode extends Component {
         alert("test2")
     }
 
+    finishEditSaveCheck = () => {
+        console.log("check");
+        clearInterval(this.editFinishTimeout);
+        this.editFinishTimeout = setTimeout(() => {this.props.updateNote(this.props.note)}, this.editFinishTimeoutValue);
+    }
+
     handleTitleChange = (event) => {
         event.persist();
         this.props.setNoteTitle(event.target.value);
+        this.finishEditSaveCheck();
     }
 
     handleShortContentChange = (event) => {
         event.persist();
         this.props.setNoteShortContent(event.target.value);
+        this.finishEditSaveCheck();
     }
     
     render() {
@@ -55,7 +76,7 @@ class NoteNode extends Component {
         return (
             <>
 
-                <div className="note-node" onMouseDown={ this.handleMouseDown } onDoubleClick={ this.handleDoubleClick }>
+                <div className="note-node" id={`note-${this.props.note.id}`} onMouseDown={ this.handleMouseDown } onDoubleClick={ this.handleDoubleClick } style={{left: this.props.note.x_offset, top: this.props.note.y_offset}}>
                     <input type="text" value={this.props.note.title} onChange={this.handleTitleChange} className="node-title-input"/>
                     <br/>
                     <hr/>
@@ -86,7 +107,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         setNoteTitle: (title) => dispatch(actions.setNoteTitle(noteId, title)),
         setNoteShortContent: (shortContent) => dispatch(actions.setNoteShortContent(noteId, shortContent)),
         setNoteLongContent: (longContent) => dispatch(actions.setNoteLongContent(noteId, longContent)),
-        setNoteBoardId: (boardId) => dispatch(actions.setNoteBoardId(noteId, boardId))
+        setNoteBoardId: (boardId) => dispatch(actions.setNoteBoardId(noteId, boardId)),
+        setNoteXOffset: (xOffset) => dispatch(actions.setNoteXOffset(noteId, xOffset)),
+        setNoteYOffset: (yOffset) => dispatch(actions.setNoteYOffset(noteId, yOffset)),
+        updateNote: (note) => dispatch(actions.updateNote(note)),
     };
 };
    

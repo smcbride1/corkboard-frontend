@@ -5,7 +5,7 @@ import AddIcon from '../AddIcon.svg'
 export default class NewNoteButton extends Component {
     render() {
         return (
-            <button class="new-node-button" onClick={this.props.onClickEvent}>
+            <button id="new-node-button" onClick={this.props.onClickEvent}>
                 <img src={AddIcon}/>
             </button>
         );

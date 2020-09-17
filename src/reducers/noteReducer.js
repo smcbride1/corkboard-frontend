@@ -1,7 +1,8 @@
 export default function noteReducer(
     state = {notes: []}, action
   ) {
-    let id = action.key;
+    let notes = [...state.notes]
+    let index = notes.findIndex(note => note.id === action.id)
     switch (action.type) {
 
         case 'START_ADDING_NOTES_REQUEST':
@@ -24,8 +25,6 @@ export default function noteReducer(
             }
 
         case 'SET_NOTE_TITLE':
-            let notes = [...state.notes]
-            let index = notes.findIndex(note => note.id === action.id)
             notes[index].title = action.title;
             return {
                 ...state,
@@ -33,21 +32,50 @@ export default function noteReducer(
             }
 
         case 'SET_NOTE_SHORT_CONTENT':
+            notes[index].short_content = action.short_content;
             return {
                 ...state,
-                notes: [...state.notes, state.notes.find(note => note.id === action.id).short_content = action.short_content]
+                notes: [notes[0]]
             }
 
         case 'SET_NOTE_LONG_CONTENT':
+            notes[index].long_content = action.long_content;
             return {
                 ...state,
-                notes: [...state.notes, state.notes.find(note => note.id === action.id).long_content = action.long_content]
+                notes: [notes[0]]
             }
             
         case 'SET_NOTE_BOARD_ID':
+            notes[index].board_id = action.board_id;
             return {
                 ...state,
-                notes: [...state.notes, state.notes.find(note => note.id === action.id).board_id = action.board_id]
+                notes: [notes[0]]
+            }
+
+        case 'SET_NOTE_X_OFFSET':
+            notes[index].x_offset = action.x_offset;
+            return {
+                ...state,
+                notes: [notes[0]]
+            }
+
+        case 'SET_NOTE_Y_OFFSET':
+            notes[index].y_offset = action.y_offset;
+            return {
+                ...state,
+                notes: [notes[0]]
+            }
+
+        case 'START_UPDATING_NOTE_REQUEST':
+            return {
+                ...state,
+                updating: true
+            }
+
+        case 'FINISH_UPDATE':
+            return {
+                ...state,
+                updating: false
             }
 
         default:

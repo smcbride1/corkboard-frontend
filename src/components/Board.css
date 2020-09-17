@@ -10,3 +10,8 @@
     background-color: #3a3a3a;
     padding: 10px;
 }
+
+.save-text {
+    position: absolute;
+    right: 20px;
+}
