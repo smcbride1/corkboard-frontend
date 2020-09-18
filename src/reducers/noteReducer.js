@@ -85,10 +85,22 @@ export default function noteReducer(
             }
 
         case 'REMOVE_NOTE':
-            notes.splice(index-1, 1)
+            notes.splice(index, 1)
             return {
                 ...state,
                 notes: notes
+            }
+
+        case 'SET_SELECTED_NOTE':
+            return {
+                ...state,
+                selectedNote: action.id
+            }
+
+        case 'UNSELECT_NOTE':
+            return {
+                ...state,
+                selectedNote: null
             }
 
         default:

@@ -68,6 +68,8 @@ const START_UPDATING_NOTE_REQUEST = "START_UPDATING_NOTE_REQUEST"
 const FINISH_UPDATE = "FINISH_UPDATE"
 const START_DESTROYING_NOTE_REQUEST = "START_DESTROYING_NOTE_REQUEST"
 const REMOVE_NOTE = "REMOVE_NOTE"
+const SET_SELECTED_NOTE = "SET_SELECTED_NOTE"
+const UNSELECT_NOTE = "UNSELECT_NOTE"
 
 export function createNote(boardId) {
     let formData = new FormData();
@@ -156,6 +158,14 @@ export function destroyNote(note) {
 
 export function removeNote(note) {
     return { type: REMOVE_NOTE, note: note }
+}
+
+export function setSelectedNote(id) {
+    return { type: SET_SELECTED_NOTE, id: id }
+}
+
+export function unselectNote() {
+    return { type: UNSELECT_NOTE }
 }
 
 //USERS

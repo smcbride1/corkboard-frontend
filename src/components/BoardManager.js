@@ -40,12 +40,12 @@ export class BoardManager extends Component {
                 <ToggleBoardManagerButton onClickEvent={this.toggleCollapse}/>
                 <div id="board-manager">
                     <Button onClickEvent={this.handleClickNoteButton} text="New Board"/>
-                        <h2>Boards</h2>
-                        <div id="board-list">
-                            {this.props.boards.map(board => 
-                                <Button onClickEvent={this.handleClickBoardButton} text={board.name} key={board.id} id={`board-list-item-${board.id}`}/>
-                            )}
-                        </div>
+                    <h2>Boards</h2>
+                    <div id="board-list">
+                        {this.props.boards.map(board => 
+                            <Button onClickEvent={this.handleClickBoardButton} text={board.name} key={board.id} id={`board-list-item-${board.id}`}/>
+                        )}
+                    </div>
                 </div>
                 {this.props.currentBoard ? <Board id={`board-${this.props.currentBoard}`}/> : <div class="wrapper"><h2>Select a Board</h2></div>}
             </>

@@ -53,7 +53,7 @@ class NoteNode extends Component {
     }
     
     handleDoubleClick = (event) => {
-        alert("test2")
+        this.props.setSelectedNote(this.props.note.id);
     }
 
     finishEditSaveCheck = () => {
@@ -75,8 +75,15 @@ class NoteNode extends Component {
     }
 
     handleOnClickDelete = (event) => {
+        if (this.props.selectedNote === this.props.note.id) {
+            this.props.unselectNote();
+        }
         this.props.destroyNote(this.props.note);
         this.props.removeNote(this.props.note);
+    }
+
+    handleOnClickExpandContent = (event) => {
+        this.props.expandContent(this.props.note);
     }
     
     render() {
@@ -106,7 +113,8 @@ const mapStateToProps = (state, ownProps) => {
     //`note` having a value that is dependent on .find?
     return {
         note: state.note.notes.find(note => note.id === id),
-        notes: state.note.notes
+        notes: state.note.notes,
+        selectedNote: state.note.selectedNote
     };
 };
    
@@ -122,7 +130,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         setNoteYOffset: (yOffset) => dispatch(actions.setNoteYOffset(noteId, yOffset)),
         updateNote: (note) => dispatch(actions.updateNote(note)),
         destroyNote: (note) => dispatch(actions.destroyNote(note)),
-        removeNote: (note) => dispatch(actions.removeNote(note))
+        removeNote: (note) => dispatch(actions.removeNote(note)),
+        setSelectedNote: (id) => dispatch(actions.setSelectedNote(id)),
+        unselectNote: () => dispatch(actions.unselectNote())
     };
 };
    

@@ -9,6 +9,7 @@
     border-style: solid;
     border-top-width: 28px;
     position: absolute;
+    display: block;
 }
 
 input[type=text].node-title-input {
