@@ -16,7 +16,7 @@ class NoteNode extends Component {
             typing: false,
         }
 
-        this.mouseEvent = null;
+        this.mouseTarget = null;
         this.offsetAdjustmentX = 10;
         this.offsetAdjustmentY = 80;
         this.editFinishTimeout = null;
@@ -28,23 +28,25 @@ class NoteNode extends Component {
 
     handleMouseDown = (event) => {
         event.persist();
-        this.mouseEvent = event;
+        if (event.target.className === "drag-top-bar") {
+            this.mouseTarget = event.target.parentElement;
+        }
     }
 
     handleMouseUp = () => {
-        if (this.mouseEvent) {
+        if (this.mouseTarget) {
             let thisNote = document.getElementById(`note-${this.props.note.id}`);
             this.props.setNoteXOffset(thisNote.style.left.split("px")[0]);
             this.props.setNoteYOffset(thisNote.style.top.split("px")[0]);
             this.finishEditSaveCheck();
         }
-        this.mouseEvent = null;
+        this.mouseTarget = null;
     }
 
     handleMouseMove = (event) => {
-        if (this.mouseEvent) {
-            this.mouseEvent.target.style["left"] = `${event.clientX - this.offsetAdjustmentX}px`;
-            this.mouseEvent.target.style["top"] = `${event.clientY - this.offsetAdjustmentY}px`;
+        if (this.mouseTarget) {
+            this.mouseTarget.style["left"] = `${event.clientX - this.offsetAdjustmentX}px`;
+            this.mouseTarget.style["top"] = `${event.clientY - this.offsetAdjustmentY}px`;
         }
     }
     
@@ -80,7 +82,8 @@ class NoteNode extends Component {
         document.addEventListener("mousemove", this.handleMouseMove);
         return (
             <>
-                <div className="note-node" id={`note-${this.props.note.id}`} onMouseDown={ this.handleMouseDown } onDoubleClick={ this.handleDoubleClick } style={{left: this.props.note.x_offset, top: this.props.note.y_offset}}>
+                <div className="note-node" id={`note-${this.props.note.id}`} onDoubleClick={ this.handleDoubleClick } style={{left: this.props.note.x_offset, top: this.props.note.y_offset}}>
+                    <button className="drag-top-bar" onMouseDown={ this.handleMouseDown }></button>
                     <button className="delete-button" onClick={this.handleOnClickDelete}>x</button>
                     <input type="text" value={this.props.note.title} onChange={this.handleTitleChange} className="node-title-input"/>
                     <br/>

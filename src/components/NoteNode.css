@@ -9,7 +9,6 @@
     border-style: solid;
     border-top-width: 28px;
     position: absolute;
-    cursor: grab;
 }
 
 input[type=text].node-title-input {
@@ -44,4 +43,15 @@ button.delete-button {
     top: -25px;
     padding: 3px 7px;
     font-size: 12pt;
+}
+
+button.drag-top-bar {
+    cursor: grab;
+    position: absolute;
+    width: 100%;
+    height: 28px;
+    left: 0px;
+    top: -28px;
+    border-radius: 5px;
+    opacity: 0;
 }
