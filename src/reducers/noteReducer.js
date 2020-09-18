@@ -77,6 +77,19 @@ export default function noteReducer(
                 ...state,
                 updating: false
             }
+            
+        case 'START_DESTROYING_NOTE_REQUEST':
+            return {
+                ...state,
+                updating: false
+            }
+
+        case 'REMOVE_NOTE':
+            notes.splice(index-1, 1)
+            return {
+                ...state,
+                notes: notes
+            }
 
         default:
             return state;

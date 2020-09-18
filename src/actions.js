@@ -66,6 +66,8 @@ const START_CREATING_NOTE_REQUEST = "START_CREATING_NOTE_REQUEST"
 const START_FETCHING_NOTES_REQUEST = "START_FETCHING_NOTES_REQUEST"
 const START_UPDATING_NOTE_REQUEST = "START_UPDATING_NOTE_REQUEST"
 const FINISH_UPDATE = "FINISH_UPDATE"
+const START_DESTROYING_NOTE_REQUEST = "START_DESTROYING_NOTE_REQUEST"
+const REMOVE_NOTE = "REMOVE_NOTE"
 
 export function createNote(boardId) {
     let formData = new FormData();
@@ -140,6 +142,20 @@ export function updateNote(note) {
 
 export function finishUpdate() {
     return { type: FINISH_UPDATE }
+}
+
+export function destroyNote(note) {
+    return (dispatch) => {
+      dispatch({ type: START_DESTROYING_NOTE_REQUEST });
+      fetch(`http://localhost:4000/notes/${note.id}`, {
+          credentials: 'include',
+          method: 'delete',
+      })
+    };
+}
+
+export function removeNote(note) {
+    return { type: REMOVE_NOTE, note: note }
 }
 
 //USERS

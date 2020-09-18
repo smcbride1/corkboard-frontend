@@ -7,7 +7,7 @@
     border-radius: 10px;
     border-color: #4D4D4D;
     border-style: solid;
-    border-top-width: 20px;
+    border-top-width: 28px;
     position: absolute;
     cursor: grab;
 }
@@ -34,4 +34,14 @@ input[type=text].node-title-input {
 hr {
     color: white;
     width: auto;
+}
+
+button.delete-button {
+    background-color: rgb(216, 45, 45);
+    color: white;
+    position: absolute;
+    right: 0px;
+    top: -25px;
+    padding: 3px 7px;
+    font-size: 12pt;
 }

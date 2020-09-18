@@ -69,14 +69,19 @@ class NoteNode extends Component {
         this.props.setNoteShortContent(event.target.value);
         this.finishEditSaveCheck();
     }
+
+    handleOnClickDelete = (event) => {
+        this.props.destroyNote(this.props.note);
+        this.props.removeNote(this.props.note);
+    }
     
     render() {
         document.addEventListener("mouseup", this.handleMouseUp);
         document.addEventListener("mousemove", this.handleMouseMove);
         return (
             <>
-
                 <div className="note-node" id={`note-${this.props.note.id}`} onMouseDown={ this.handleMouseDown } onDoubleClick={ this.handleDoubleClick } style={{left: this.props.note.x_offset, top: this.props.note.y_offset}}>
+                    <button className="delete-button" onClick={this.handleOnClickDelete}>x</button>
                     <input type="text" value={this.props.note.title} onChange={this.handleTitleChange} className="node-title-input"/>
                     <br/>
                     <hr/>
@@ -111,6 +116,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         setNoteXOffset: (xOffset) => dispatch(actions.setNoteXOffset(noteId, xOffset)),
         setNoteYOffset: (yOffset) => dispatch(actions.setNoteYOffset(noteId, yOffset)),
         updateNote: (note) => dispatch(actions.updateNote(note)),
+        destroyNote: (note) => dispatch(actions.destroyNote(note)),
+        removeNote: (note) => dispatch(actions.removeNote(note))
     };
 };
    
