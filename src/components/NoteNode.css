@@ -43,6 +43,7 @@ button.delete-button {
     top: -25px;
     padding: 3px 7px;
     font-size: 12pt;
+    user-select: none;
 }
 
 button.drag-top-bar {

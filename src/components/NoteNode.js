@@ -24,20 +24,22 @@ class NoteNode extends Component {
     }
     
     componentDidMount() {
+        this.noteElement = document.getElementById(`note-${this.props.note.id}`);
     }
 
     handleMouseDown = (event) => {
         event.persist();
         if (event.target.className === "drag-top-bar") {
             this.mouseTarget = event.target.parentElement;
+            this.offsetAdjustmentX = event.clientX - this.noteElement.style.left.split("px")[0];
+            this.offsetAdjustmentY = event.clientY - this.noteElement.style.top.split("px")[0];
         }
     }
 
     handleMouseUp = () => {
         if (this.mouseTarget) {
-            let thisNote = document.getElementById(`note-${this.props.note.id}`);
-            this.props.setNoteXOffset(thisNote.style.left.split("px")[0]);
-            this.props.setNoteYOffset(thisNote.style.top.split("px")[0]);
+            this.props.setNoteXOffset(this.noteElement.style.left.split("px")[0]);
+            this.props.setNoteYOffset(this.noteElement.style.top.split("px")[0]);
             this.finishEditSaveCheck();
         }
         this.mouseTarget = null;
