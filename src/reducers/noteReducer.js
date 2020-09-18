@@ -28,42 +28,42 @@ export default function noteReducer(
             notes[index].title = action.title;
             return {
                 ...state,
-                notes: [notes[0]]
+                notes: notes
             }
 
         case 'SET_NOTE_SHORT_CONTENT':
             notes[index].short_content = action.short_content;
             return {
                 ...state,
-                notes: [notes[0]]
+                notes: notes
             }
 
         case 'SET_NOTE_LONG_CONTENT':
             notes[index].long_content = action.long_content;
             return {
                 ...state,
-                notes: [notes[0]]
+                notes: notes
             }
             
         case 'SET_NOTE_BOARD_ID':
             notes[index].board_id = action.board_id;
             return {
                 ...state,
-                notes: [notes[0]]
+                notes: notes
             }
 
         case 'SET_NOTE_X_OFFSET':
             notes[index].x_offset = action.x_offset;
             return {
                 ...state,
-                notes: [notes[0]]
+                notes: notes
             }
 
         case 'SET_NOTE_Y_OFFSET':
             notes[index].y_offset = action.y_offset;
             return {
                 ...state,
-                notes: [notes[0]]
+                notes: notes
             }
 
         case 'START_UPDATING_NOTE_REQUEST':

@@ -12,7 +12,7 @@ export class Board extends Component {
     }
 
     handleClickCreateNoteButton = () => {
-        this.props.createNote()
+        this.props.createNote(this.props.board.id)
     }
 
     componentDidMount() {

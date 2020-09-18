@@ -67,10 +67,9 @@ const START_FETCHING_NOTES_REQUEST = "START_FETCHING_NOTES_REQUEST"
 const START_UPDATING_NOTE_REQUEST = "START_UPDATING_NOTE_REQUEST"
 const FINISH_UPDATE = "FINISH_UPDATE"
 
-export function createNote(userId, boardId) {
+export function createNote(boardId) {
     let formData = new FormData();
-    formData.append('user_id', userId);
-    formData.append('board_id', boardId);
+    formData.append('note[board_id]', boardId);
 
     return (dispatch) => {
       dispatch({ type: START_CREATING_NOTE_REQUEST });

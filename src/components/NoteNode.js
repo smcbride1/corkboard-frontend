@@ -20,7 +20,7 @@ class NoteNode extends Component {
         this.offsetAdjustmentX = 10;
         this.offsetAdjustmentY = 80;
         this.editFinishTimeout = null;
-        this.editFinishTimeoutValue = 5000;
+        this.editFinishTimeoutValue = 1000;
     }
     
     componentDidMount() {
