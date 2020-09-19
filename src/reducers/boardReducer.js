@@ -1,7 +1,8 @@
 export default function boardReducer(
     state = {boards: []}, action
   ) {
-    let id = action.key;
+    let boards = [...state.boards]
+    let index = boards.findIndex(board => board.id === action.id)
     switch (action.type) {
 
       case 'START_CREATING_BOARD_REQUEST':
@@ -32,15 +33,35 @@ export default function boardReducer(
           }
 
       case 'SET_BOARD_NAME':
+        boards[index].name = action.name;
         return {
-          ...state,
-          boards: [...state.boards, state.boards.find(board => board.id === action.id).name = action.name]
+            ...state,
+            boards: boards
         }
 
-      case 'SET_BOARD_USER_ID':
+      case 'START_UPDATING_BOARD_REQUEST':
         return {
-          ...state,
-          boards: [...state.boards, state.boards.find(board => board.id === action.id).userId = action.userId]
+            ...state,
+            updating: true
+        }
+
+      case 'FINISH_BOARD_UPDATE':
+        return {
+            ...state,
+            updating: false
+        }
+          
+      case 'START_DESTROYING_BOARD_REQUEST':
+        return {
+            ...state,
+            updating: false
+        }
+
+      case 'REMOVE_BOARD':
+        boards.splice(index, 1)
+        return {
+            ...state,
+            boards: boards
         }
 
       case 'SET_CURRENT_BOARD':

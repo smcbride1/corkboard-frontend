@@ -72,7 +72,7 @@ export default function noteReducer(
                 updating: true
             }
 
-        case 'FINISH_UPDATE':
+        case 'FINISH_NOTE_UPDATE':
             return {
                 ...state,
                 updating: false

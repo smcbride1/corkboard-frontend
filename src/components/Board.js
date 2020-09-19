@@ -19,7 +19,7 @@ export class Board extends Component {
     }
 
     componentDidMount() {
-        this.props.fetchNotes(this.props.board.id);
+        this.props.fetchNotes(this.props.id);
     }
 
     finishEditSaveCheck = () => {
@@ -66,11 +66,12 @@ export class Board extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    let id = parseInt(ownProps.id.split("board-")[1]);
+    let id = ownProps.id;
     return {
         user: state.user,
         notes: state.note.notes,
         updatingNote: state.note.updatingNote,
+        id: id,
         board: state.board.boards.find(board => board.id === id),
         selectedNoteId: state.note.selectedNote,
         selectedNote: state.note.notes.find(note => note.id === state.note.selectedNote)

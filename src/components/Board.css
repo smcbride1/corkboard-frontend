@@ -23,7 +23,7 @@
 
 #expanded-content {
     background-color: grey;
-    width: 300px;
+    width: 400px;
     height: 100%;
     padding: 10px;
     z-index: 9;
@@ -38,4 +38,8 @@
     font-weight: 400;
     color: white;
     width: 100%;
+}
+
+textarea {
+    height: 90%;
 }

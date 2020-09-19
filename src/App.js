@@ -57,6 +57,7 @@ export class App extends Component {
         <Router>
           <Route exact path="/" component={Home}></Route>
           <Route exact path="/boards" component={this.props.loggedIn ? BoardManager : Login}></Route>
+          <Route path="/boards/:boardId" component={this.props.loggedIn ? BoardManager : Login}></Route>
           <Route exact path="/login" component={Login}></Route>
           <Route exact path="/register" component={Register}></Route>
         </Router>

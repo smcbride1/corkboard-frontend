@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import './BoardManager.css';
 import Board from './Board.js';
 import Button from './Button.js';
+import BoardListItem from './BoardListItem.js';
 import ToggleBoardManagerButton from './ToggleBoardManagerButton.js'
 import * as actions from '../actions.js'
 
@@ -15,8 +17,20 @@ export class BoardManager extends Component {
     }
 
     handleClickBoardButton = (event) => {
-        this.props.setCurrentBoard(parseInt(event.target.id.split("board-list-item-")[1]))
+        window.location = `../boards/${parseInt(event.target.id.split("board-list-item-")[1])}`
+        //this.props.setCurrentBoard(parseInt(event.target.id.split("board-list-item-")[1]))
         this.toggleCollapse();
+    }
+
+    handleOnClickDelete = (event) => {
+        let id = parseInt(event.target.id.split("board-list-item-")[1]);
+        let board = this.props.boards.find(board => board.id === id);
+        this.props.destroyBoard(board);
+        this.props.removeBoard(board);
+    }
+
+    handleClickNoteButton = (event) => {
+        this.props.createBoard(this.props.user.id);
     }
 
     toggleCollapse = () => {
@@ -31,6 +45,9 @@ export class BoardManager extends Component {
     }
 
     componentDidMount() {
+        if (this.props.match.params.boardId) {
+            this.toggleCollapse()
+        }
         this.props.fetchBoards(this.props.user.id);
     }
 
@@ -43,11 +60,11 @@ export class BoardManager extends Component {
                     <h2>Boards</h2>
                     <div id="board-list">
                         {this.props.boards.map(board => 
-                            <Button onClickEvent={this.handleClickBoardButton} text={board.name} key={board.id} id={`board-list-item-${board.id}`}/>
+                            <BoardListItem onClickEvent={this.handleClickBoardButton} onDeleteClickEvent={this.handleOnClickDelete} text={board.name} key={board.id} id={`board-list-item-${board.id}`}/>
                         )}
                     </div>
                 </div>
-                {this.props.currentBoard ? <Board id={`board-${this.props.currentBoard}`}/> : <div class="wrapper"><h2>Select a Board</h2></div>}
+                {this.props.match.params.boardId ? <Board id={parseInt(this.props.match.params.boardId)}/> : <div class="wrapper"><h2>Select a Board</h2></div>}
             </>
         );
     }
@@ -64,7 +81,10 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         setCurrentBoard: (id) => dispatch(actions.setCurrentBoard(id)),
-        fetchBoards: (userId) => dispatch(actions.fetchBoards(userId))
+        fetchBoards: (userId) => dispatch(actions.fetchBoards(userId)),
+        createBoard: (userId) => dispatch(actions.createBoard(userId)),
+        destroyBoard: (id) => dispatch(actions.destroyBoard(id)),
+        removeBoard: (id) => dispatch(actions.removeBoard(id))
     };
 };
    
