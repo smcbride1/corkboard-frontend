@@ -60,12 +60,14 @@ export class BoardManager extends Component {
                     <h2>Boards</h2>
                     <div id="board-list">
                         {this.props.boards.map(board => 
-                            <BoardListItem onClickEvent={this.handleClickBoardButton} onDeleteClickEvent={this.handleOnClickDelete} text={board.name} key={board.id} id={`board-list-item-${board.id}`}/>
+                            <BoardListItem key={board.id} onClickEvent={this.handleClickBoardButton} onDeleteClickEvent={this.handleOnClickDelete} text={board.name} id={`board-list-item-${board.id}`}/>
                         )}
                     </div>
                 </div>
-                {this.props.match.params.boardId ? <Board id={parseInt(this.props.match.params.boardId)}/> : <div class="wrapper"><h2>Select a Board</h2></div>}
+                {this.props.match.params.boardId && this.props.boards.length !== 0 ? <Board id={parseInt(this.props.match.params.boardId)}/> : <div className="wrapper"><h2>Select a Board</h2></div>}
             </>
+            //Only return board component if board id param exists and boards have finished being fetched
+            //(this is important because board component needs to access boards array in state)
         );
     }
 }

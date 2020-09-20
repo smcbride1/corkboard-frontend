@@ -28,6 +28,12 @@ export class Board extends Component {
         this.editFinishTimeout = setTimeout(() => {this.props.updateNote(this.props.selectedNote)}, this.editFinishTimeoutValue);
     }
 
+    finishEditSaveCheckBoard = () => {
+        console.log("check3");
+        clearInterval(this.editFinishTimeout);
+        this.editFinishTimeout = setTimeout(() => {this.props.updateBoard(this.props.board)}, this.editFinishTimeoutValue);
+    }
+
     handleTitleChange = (event) => {
         event.persist();
         this.props.setNoteTitle(this.props.selectedNoteId, event.target.value);
@@ -40,27 +46,32 @@ export class Board extends Component {
         this.finishEditSaveCheck();
     }
 
+    handleNameChange = (event) => {
+        event.persist();
+        this.props.setBoardName(this.props.id, event.target.value);
+        this.finishEditSaveCheckBoard();
+    }
+
     render() {
         return (
-            <>
-                <div id="board-canvas">
-                    <NewNoteButton onClickEvent={this.handleClickCreateNoteButton}/>
-                    <div className="wrapper">
-                        {this.props.updatingNote ? <p className="save-text">Saving...</p> : <p className="save-text">Saved</p>}
-                    </div>
-                    {this.props.notes.map(note => <NoteNode id={`note-${note.id}`}/>)}
-                    {this.props.selectedNoteId ? <div id="expanded-content">
-                        <input type="text" value={this.props.selectedNote.title} onChange={this.handleTitleChange} className="node-title-input"/>
-                        <br/>
-                        <hr/>
-                        <br/>
-                        <textarea value={this.props.selectedNote.long_content} onChange={this.handleLongContentChange} className="node-long-content-area"/>
-                    </div>
-                    :
-                    ""}
-                    <div class="background-click-capture" onClick={this.props.unselectNote}></div>
+            <div className="board-canvas" id={`board-${this.props.board.id}`}>
+                <input type="text" className="board-name-input" value={this.props.board.name} onChange={this.handleNameChange}/>
+                <NewNoteButton onClickEvent={this.handleClickCreateNoteButton}/>
+                <div className="wrapper">
+                    {this.props.updatingNote ? <p className="save-text">Saving...</p> : <p className="save-text">Saved</p>}
                 </div>
-            </>
+                {this.props.notes.map(note => <NoteNode key={note.id} id={`note-${note.id}`}/>)}
+                {this.props.selectedNoteId ? <div id="expanded-content">
+                    <input type="text" value={this.props.selectedNote.title} onChange={this.handleTitleChange} className="node-title-input"/>
+                    <br/>
+                    <hr/>
+                    <br/>
+                    <textarea value={this.props.selectedNote.long_content} onChange={this.handleLongContentChange} className="node-long-content-area"/>
+                </div>
+                :
+                ""}
+            <div className="background-click-capture" onClick={this.props.unselectNote}></div>
+        </div>
         );
     }
 }
@@ -73,6 +84,8 @@ const mapStateToProps = (state, ownProps) => {
         updatingNote: state.note.updatingNote,
         id: id,
         board: state.board.boards.find(board => board.id === id),
+        //Honestly not sure why adding the below line fixed this.props.board.name not calling render when changed in the name change input
+        boardName: state.board.boards.find(board => board.id === id).name,
         selectedNoteId: state.note.selectedNote,
         selectedNote: state.note.notes.find(note => note.id === state.note.selectedNote)
     };
@@ -86,7 +99,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         setNoteTitle: (id, title) => dispatch(actions.setNoteTitle(id, title)),
         setNoteLongContent: (id, longContent) => dispatch(actions.setNoteLongContent(id, longContent)),
         updateNote: (note) => dispatch(actions.updateNote(note)),
-        unselectNote: () => dispatch(actions.unselectNote())
+        unselectNote: () => dispatch(actions.unselectNote()),
+        setBoardName: (id, name) => dispatch(actions.setBoardName(id, name)),
+        updateBoard: (board) => dispatch(actions.updateBoard(board))
     };
 };
    

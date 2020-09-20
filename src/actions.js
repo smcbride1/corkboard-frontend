@@ -192,7 +192,7 @@ export function destroyNote(note) {
 }
 
 export function removeNote(note) {
-    return { type: REMOVE_NOTE, note: note }
+    return { type: REMOVE_NOTE, id: note.id }
 }
 
 export function setSelectedNote(id) {

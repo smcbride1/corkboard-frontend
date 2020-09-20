@@ -1,4 +1,4 @@
-#board-canvas {
+.board-canvas {
     display: flex;
     background-color: coral;
     width: 100%;
@@ -42,4 +42,15 @@
 
 textarea {
     height: 90%;
+}
+
+
+input[type=text].board-name-input {
+    background-color: transparent;
+    border-style: none;
+    font-size: 28px;
+    font-weight: 700;
+    color: white;
+    width: 100%;
+    text-align: center;
 }

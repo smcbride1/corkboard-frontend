@@ -90,17 +90,15 @@ class NoteNode extends Component {
         document.addEventListener("mouseup", this.handleMouseUp);
         document.addEventListener("mousemove", this.handleMouseMove);
         return (
-            <>
-                <div className="note-node" id={`note-${this.props.note.id}`} onDoubleClick={ this.handleDoubleClick } style={{left: this.props.note.x_offset, top: this.props.note.y_offset}}>
-                    <button className="drag-top-bar" onMouseDown={ this.handleMouseDown }></button>
-                    <button className="delete-button" onClick={this.handleOnClickDelete}>x</button>
-                    <input type="text" value={this.props.note.title} onChange={this.handleTitleChange} className="node-title-input"/>
-                    <br/>
-                    <hr/>
-                    <br/>
-                    <textarea value={this.props.note.short_content} onChange={this.handleShortContentChange} className="node-short-content-area"/>
-                </div>
-            </>
+            <div className="note-node" id={`note-${this.props.note.id}`} onDoubleClick={ this.handleDoubleClick } style={{left: this.props.note.x_offset, top: this.props.note.y_offset}}>
+            <button className="drag-top-bar" onMouseDown={ this.handleMouseDown }></button>
+            <button className="delete-button" onClick={this.handleOnClickDelete}>x</button>
+            <input type="text" value={this.props.note.title} onChange={this.handleTitleChange} className="node-title-input"/>
+            <br/>
+            <hr/>
+            <br/>
+            <textarea value={this.props.note.short_content} onChange={this.handleShortContentChange} className="node-short-content-area"/>
+        </div>
         );
     }
 }
