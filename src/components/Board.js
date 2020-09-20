@@ -5,6 +5,8 @@ import NoteNode from './NoteNode.js';
 import NewNoteButton from './NewNoteButton.js';
 import Button from './Button.js';
 import * as actions from '../actions.js'
+import ZoomInButton from './ZoomInButton';
+import ZoomOutButton from './ZoomOutButton';
 
 export class Board extends Component {
     constructor() {
@@ -52,15 +54,35 @@ export class Board extends Component {
         this.finishEditSaveCheckBoard();
     }
 
+    handleClickZoomInButton = () => {
+        //For Chrome, Safari, IE
+        document.getElementById("notes-container").style.zoom = "2"
+        //For Firefox (Doesn't work correctly currently)
+        document.getElementById("notes-container").style["-moz-transform"] = "scale(2)"
+        document.getElementById("notes-container").style["-moz-transform-origin"] = "0 0"
+    }
+
+    handleClickZoomOutButton = () => {
+        //For Chrome, Safari, IE
+        document.getElementById("notes-container").style.zoom = "1"
+        //For Firefox (Doesn't work correctly currently)
+        document.getElementById("notes-container").style["-moz-transform"] = "scale(1)"
+        document.getElementById("notes-container").style["-moz-transform-origin"] = "0 0"
+    }
+
     render() {
         return (
             <div className="board-canvas" id={`board-${this.props.board.id}`}>
                 <input type="text" className="board-name-input" value={this.props.board.name} onChange={this.handleNameChange}/>
                 <NewNoteButton onClickEvent={this.handleClickCreateNoteButton}/>
+                <ZoomInButton onClickEvent={this.handleClickZoomInButton}/>
+                <ZoomOutButton onClickEvent={this.handleClickZoomOutButton}/>
                 <div className="wrapper">
                     {this.props.updatingNote ? <p className="save-text">Saving...</p> : <p className="save-text">Saved</p>}
                 </div>
-                {this.props.notes.map(note => <NoteNode key={note.id} id={`note-${note.id}`}/>)}
+                <div id="notes-container">
+                    {this.props.notes.map(note => <NoteNode key={note.id} id={`note-${note.id}`}/>)}
+                </div>
                 {this.props.selectedNoteId ? <div id="expanded-content">
                     <input type="text" value={this.props.selectedNote.title} onChange={this.handleTitleChange} className="node-title-input"/>
                     <br/>
