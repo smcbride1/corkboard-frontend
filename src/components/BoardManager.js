@@ -26,7 +26,13 @@ export class BoardManager extends Component {
         let id = parseInt(event.target.id.split("board-list-item-")[1]);
         let board = this.props.boards.find(board => board.id === id);
         this.props.destroyBoard(board);
-        this.props.removeBoard(board);
+        console.log(`ID: ${id}, PARAMS_ID: ${parseInt(this.props.match.params.boardId)}, ${id === parseInt(this.props.match.params.boardId)}`)
+        if (id === parseInt(this.props.match.params.boardId)) {
+            console.log("Redirect")
+            window.location = `../boards`;
+        } else {
+            this.props.removeBoard(board);
+        }
     }
 
     handleClickNoteButton = (event) => {

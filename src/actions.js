@@ -82,7 +82,7 @@ export function destroyBoard(board) {
 }
 
 export function removeBoard(board) {
-    return { type: REMOVE_BOARD, board: board }
+    return { type: REMOVE_BOARD, id: board.id }
 }
 
 export function setCurrentBoard(id) {
