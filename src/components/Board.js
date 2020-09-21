@@ -14,6 +14,10 @@ export class Board extends Component {
 
         this.editFinishTimeout = null;
         this.editFinishTimeoutValue = 1000;
+
+        this.state = {
+            zoomLevel: 1
+        }
     }
 
     handleClickCreateNoteButton = () => {
@@ -55,18 +59,24 @@ export class Board extends Component {
     }
 
     handleClickZoomInButton = () => {
+        if (this.state.zoomLevel <= 1.5) {
+            this.setState((prevState, props) => ({zoomLevel: prevState.zoomLevel + 0.1}))
+        }
         //For Chrome, Safari, IE
-        document.getElementById("notes-container").style.zoom = "2"
+        document.getElementById("notes-container").style.zoom = this.state.zoomLevel
         //For Firefox (Doesn't work correctly currently)
-        document.getElementById("notes-container").style["-moz-transform"] = "scale(2)"
+        document.getElementById("notes-container").style["-moz-transform"] = `scale(${this.state.zoomLevel})`
         document.getElementById("notes-container").style["-moz-transform-origin"] = "0 0"
     }
 
     handleClickZoomOutButton = () => {
+        if (this.state.zoomLevel >= 0.5) {
+            this.setState((prevState, props) => ({zoomLevel: prevState.zoomLevel - 0.1}))
+        }
         //For Chrome, Safari, IE
-        document.getElementById("notes-container").style.zoom = "1"
+        document.getElementById("notes-container").style.zoom = this.state.zoomLevel
         //For Firefox (Doesn't work correctly currently)
-        document.getElementById("notes-container").style["-moz-transform"] = "scale(1)"
+        document.getElementById("notes-container").style["-moz-transform"] = `scale(${this.state.zoomLevel})`
         document.getElementById("notes-container").style["-moz-transform-origin"] = "0 0"
     }
 
