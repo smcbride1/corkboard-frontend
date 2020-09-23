@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import './BoardManager.css';
 import Board from './Board.js';
 import Button from './Button.js';
-import BoardListItem from './BoardListItem.js';
+import BoardContainer from './BoardContainer.js';
+//import BoardListItem from './BoardListItem.js';
 import ToggleBoardManagerButton from './ToggleBoardManagerButton.js'
 import * as actions from '../actions.js'
 
@@ -14,25 +15,6 @@ export class BoardManager extends Component {
         this.state = {
             collapsed: false
         };
-    }
-
-    handleClickBoardButton = (event) => {
-        window.location = `../boards/${parseInt(event.target.id.split("board-list-item-")[1])}`
-        //this.props.setCurrentBoard(parseInt(event.target.id.split("board-list-item-")[1]))
-        this.toggleCollapse();
-    }
-
-    handleOnClickDelete = (event) => {
-        let id = parseInt(event.target.id.split("board-list-item-")[1]);
-        let board = this.props.boards.find(board => board.id === id);
-        this.props.destroyBoard(board);
-        console.log(`ID: ${id}, PARAMS_ID: ${parseInt(this.props.match.params.boardId)}, ${id === parseInt(this.props.match.params.boardId)}`)
-        if (id === parseInt(this.props.match.params.boardId)) {
-            console.log("Redirect")
-            window.location = `../boards`;
-        } else {
-            this.props.removeBoard(board);
-        }
     }
 
     handleClickNoteButton = (event) => {
@@ -50,11 +32,20 @@ export class BoardManager extends Component {
         }
     }
 
+    deleteCurrentRedirectCheck = (id, board) => {
+        console.log(`ID: ${id}, PARAMS_ID: ${parseInt(this.props.match.params.boardId)}, ${id === parseInt(this.props.match.params.boardId)}`)
+        if (id === parseInt(this.props.match.params.boardId)) {
+            console.log("Redirect")
+            window.location = `../boards`;
+        } else {
+            this.props.removeBoard(board);
+        }
+    }
+
     componentDidMount() {
         if (this.props.match.params.boardId) {
             this.toggleCollapse()
         }
-        this.props.fetchBoards(this.props.user.id);
     }
 
     render() {
@@ -64,11 +55,7 @@ export class BoardManager extends Component {
                 <div id="board-manager">
                     <Button onClickEvent={this.handleClickNoteButton} text="New Board"/>
                     <h2>Boards</h2>
-                    <div id="board-list">
-                        {this.props.boards.map(board => 
-                            <BoardListItem key={board.id} onClickEvent={this.handleClickBoardButton} onDeleteClickEvent={this.handleOnClickDelete} text={board.name} id={`board-list-item-${board.id}`}/>
-                        )}
-                    </div>
+                    <BoardContainer userId={this.props.user.id} onDelete={this.deleteCurrentRedirectCheck}/>
                 </div>
                 {this.props.match.params.boardId && this.props.boards.length !== 0 ? <Board id={parseInt(this.props.match.params.boardId)}/> : <div className="wrapper"><h2>Select a Board</h2></div>}
             </>

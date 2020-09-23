@@ -4,6 +4,7 @@ import './Board.css';
 import NoteNode from './NoteNode.js';
 import NewNoteButton from './NewNoteButton.js';
 import Button from './Button.js';
+import NoteContainer from './NoteContainer.js';
 import * as actions from '../actions.js'
 import ZoomInButton from './ZoomInButton';
 import ZoomOutButton from './ZoomOutButton';
@@ -25,7 +26,7 @@ export class Board extends Component {
     }
 
     componentDidMount() {
-        this.props.fetchNotes(this.props.id);
+        //this.props.fetchNotes(this.props.id);
     }
 
     finishEditSaveCheck = () => {
@@ -59,25 +60,27 @@ export class Board extends Component {
     }
 
     handleClickZoomInButton = () => {
+        console.log("zoom in")
         if (this.state.zoomLevel <= 1.5) {
             this.setState((prevState, props) => ({zoomLevel: prevState.zoomLevel + 0.1}))
         }
         //For Chrome, Safari, IE
-        document.getElementById("notes-container").style.zoom = this.state.zoomLevel
+        document.getElementById("note-container").style.zoom = this.state.zoomLevel
         //For Firefox (Doesn't work correctly currently)
-        document.getElementById("notes-container").style["-moz-transform"] = `scale(${this.state.zoomLevel})`
-        document.getElementById("notes-container").style["-moz-transform-origin"] = "0 0"
+        document.getElementById("note-container").style["-moz-transform"] = `scale(${this.state.zoomLevel})`
+        document.getElementById("note-container").style["-moz-transform-origin"] = "0 0"
     }
 
     handleClickZoomOutButton = () => {
+        console.log("zoom out")
         if (this.state.zoomLevel >= 0.5) {
             this.setState((prevState, props) => ({zoomLevel: prevState.zoomLevel - 0.1}))
         }
         //For Chrome, Safari, IE
-        document.getElementById("notes-container").style.zoom = this.state.zoomLevel
+        document.getElementById("note-container").style.zoom = this.state.zoomLevel
         //For Firefox (Doesn't work correctly currently)
-        document.getElementById("notes-container").style["-moz-transform"] = `scale(${this.state.zoomLevel})`
-        document.getElementById("notes-container").style["-moz-transform-origin"] = "0 0"
+        document.getElementById("note-container").style["-moz-transform"] = `scale(${this.state.zoomLevel})`
+        document.getElementById("note-container").style["-moz-transform-origin"] = "0 0"
     }
 
     render() {
@@ -87,12 +90,13 @@ export class Board extends Component {
                 <NewNoteButton onClickEvent={this.handleClickCreateNoteButton}/>
                 <ZoomInButton onClickEvent={this.handleClickZoomInButton}/>
                 <ZoomOutButton onClickEvent={this.handleClickZoomOutButton}/>
-                <div className="wrapper">
+                {/* <div className="wrapper">
                     {this.props.updatingNote ? <p className="save-text">Saving...</p> : <p className="save-text">Saved</p>}
-                </div>
-                <div id="notes-container">
+                </div> */}
+                {/* <div id="note-container">
                     {this.props.notes.map(note => <NoteNode key={note.id} id={`note-${note.id}`}/>)}
-                </div>
+                </div> */}
+                <NoteContainer boardId={this.props.id}/>
                 {this.props.selectedNoteId ? <div id="expanded-content">
                     <input type="text" value={this.props.selectedNote.title} onChange={this.handleTitleChange} className="node-title-input"/>
                     <br/>
