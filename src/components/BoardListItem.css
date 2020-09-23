@@ -1,0 +1,8 @@
+button.delete-item-button {
+    background-color: rgb(160, 32, 32);
+    color: white;
+    position: absolute;
+    padding: 6px 18px;
+    font-size: 12pt;
+    user-select: none;
+}

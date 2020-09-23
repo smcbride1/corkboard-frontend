@@ -53,8 +53,11 @@ export class BoardManager extends Component {
             <>
                 <ToggleBoardManagerButton onClickEvent={this.toggleCollapse}/>
                 <div id="board-manager">
-                    <Button onClickEvent={this.handleClickNoteButton} text="New Board"/>
+                    <div className="wrapper"><Button onClickEvent={this.handleClickNoteButton} text="NEW BOARD"/></div>
                     <h2>Boards</h2>
+                    <br></br>
+                    <hr></hr>
+                    <br></br>
                     <BoardContainer userId={this.props.user.id} onDelete={this.deleteCurrentRedirectCheck}/>
                 </div>
                 {this.props.match.params.boardId && this.props.boards.length !== 0 ? <Board id={parseInt(this.props.match.params.boardId)}/> : <div className="wrapper"><h2>Select a Board</h2></div>}

@@ -85,29 +85,33 @@ export class Board extends Component {
 
     render() {
         return (
-            <div className="board-canvas" id={`board-${this.props.board.id}`}>
-                <input type="text" className="board-name-input" value={this.props.board.name} onChange={this.handleNameChange}/>
-                <NewNoteButton onClickEvent={this.handleClickCreateNoteButton}/>
-                <ZoomInButton onClickEvent={this.handleClickZoomInButton}/>
-                <ZoomOutButton onClickEvent={this.handleClickZoomOutButton}/>
-                {/* <div className="wrapper">
-                    {this.props.updatingNote ? <p className="save-text">Saving...</p> : <p className="save-text">Saved</p>}
-                </div> */}
-                {/* <div id="note-container">
-                    {this.props.notes.map(note => <NoteNode key={note.id} id={`note-${note.id}`}/>)}
-                </div> */}
-                <NoteContainer boardId={this.props.id}/>
-                {this.props.selectedNoteId ? <div id="expanded-content">
-                    <input type="text" value={this.props.selectedNote.title} onChange={this.handleTitleChange} className="node-title-input"/>
-                    <br/>
-                    <hr/>
-                    <br/>
-                    <textarea value={this.props.selectedNote.long_content} onChange={this.handleLongContentChange} className="node-long-content-area"/>
+            <>
+                <div className="board-canvas" id={`board-${this.props.board.id}`}>
+                    <input type="text" className="board-name-input" value={this.props.board.name} onChange={this.handleNameChange}/>
+                    <NewNoteButton onClickEvent={this.handleClickCreateNoteButton}/>
+                    <div className="zoom-wrapper">
+                        <ZoomInButton onClickEvent={this.handleClickZoomInButton}/>
+                        <ZoomOutButton onClickEvent={this.handleClickZoomOutButton}/>
+                    </div>
+                    {/* <div className="wrapper">
+                        {this.props.updatingNote ? <p className="save-text">Saving...</p> : <p className="save-text">Saved</p>}
+                    </div> */}
+                    {/* <div id="note-container">
+                        {this.props.notes.map(note => <NoteNode key={note.id} id={`note-${note.id}`}/>)}
+                    </div> */}
+                    <NoteContainer boardId={this.props.id}/>
+                    {this.props.selectedNoteId ? <div id="expanded-content">
+                        <input type="text" value={this.props.selectedNote.title} onChange={this.handleTitleChange} className="node-title-input"/>
+                        <br/>
+                        <hr/>
+                        <br/>
+                        <textarea value={this.props.selectedNote.long_content} onChange={this.handleLongContentChange} className="node-long-content-area"/>
+                    </div>
+                    :
+                    ""}
+                    <div className="background-click-capture" onClick={this.props.unselectNote}></div>
                 </div>
-                :
-                ""}
-            <div className="background-click-capture" onClick={this.props.unselectNote}></div>
-        </div>
+            </>
         );
     }
 }

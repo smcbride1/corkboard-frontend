@@ -7,10 +7,8 @@ export default class ProfileNav extends Component {
         return (
             <>
                 <div className="profile-nav">
-                    <h2>
-                        {this.props.user.name}
-                        <Button onClickEvent={this.props.handleLogOut} text="Log Out"/>
-                    </h2>
+                    <h2 className="profile-username">{this.props.user.name}</h2>
+                    <Button onClickEvent={this.props.handleLogOut} text="Log Out"/>
                 </div>
             </>
         );

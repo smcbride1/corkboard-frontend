@@ -75,11 +75,14 @@ class NoteNode extends Component {
     }
 
     handleOnClickDelete = (event) => {
-        if (this.props.selectedNote === this.props.note.id) {
-            this.props.unselectNote();
+        let confirm = window.confirm(`Are you sure you want to delete note '${this.props.note.title}'?`)
+        if (confirm) {
+            if (this.props.selectedNote === this.props.note.id) {
+                this.props.unselectNote();
+            }
+            this.props.destroyNote(this.props.note);
+            this.props.removeNote(this.props.note);
         }
-        this.props.destroyNote(this.props.note);
-        this.props.removeNote(this.props.note);
     }
 
     handleOnClickExpandContent = (event) => {

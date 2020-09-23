@@ -13,8 +13,11 @@ export class BoardContainer extends Component {
     handleOnClickDelete = (event) => {
         let id = parseInt(event.target.id.split("board-list-item-")[1]);
         let board = this.props.boards.find(board => board.id === id);
-        this.props.destroyBoard(board);
-        this.props.onDelete(id, board);
+        let confirm = window.confirm(`Are you sure you want to delete board '${board.name}'?`)
+        if (confirm) {
+            this.props.destroyBoard(board);
+            this.props.onDelete(id, board);
+        }
     }
 
     componentDidMount() {
